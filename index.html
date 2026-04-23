@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelf Scan | AI-Powered Library Manager</title>
-    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <title>Shelf Sync | AI-Powered Library Manager</title>
+    <link rel="icon" type="image/png" href="unnamed.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
@@ -38,14 +38,13 @@
             align-items: center;
         }
         .logo-container {
-            width: 120px;
-            height: 120px;
+            width: 320px;
             margin-bottom: 30px;
-            filter: drop-shadow(0 0 20px rgba(184, 77, 0, 0.3));
+            filter: drop-shadow(0 0 20px rgba(184, 77, 0, 0.2));
         }
         .logo-container img {
             width: 100%;
-            height: 100%;
+            height: auto;
         }
         h1 {
             font-size: 4rem;
@@ -55,6 +54,7 @@
             background: linear-gradient(135deg, #FFF 0%, var(--accent-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: none; /* Logo already contains the name */
         }
         .tagline {
             font-size: 1.5rem;
@@ -174,16 +174,16 @@
             h1 { font-size: 2.8rem; }
             .tagline { font-size: 1.1rem; }
             header { padding-top: 60px; }
-            .logo-container { width: 100px; height: 100px; }
+            .logo-container { width: 240px; }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img src="logo.svg" alt="Shelf Scan Logo">
+            <img src="unnamed.png" alt="Shelf Sync Logo">
         </div>
-        <h1>Shelf Scan</h1>
+        <h1>Shelf Sync</h1>
         <p class="tagline">Scan to Library</p>
         <p class="description">Turn your physical bookshelf into a digital collection in seconds. Identify, value, and organize with the power of AI.</p>
         <div class="cta-button">Coming Soon to App Stores</div>
@@ -213,8 +213,8 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Shelf Scan. All rights reserved.</p>
-        <p>Shelf Scan is a product of Made in Toton Limited, a company registered in England and Wales (Company No. 17167064).</p>
+        <p>&copy; 2026 Shelf Sync. All rights reserved.</p>
+        <p>Shelf Sync is a product of Made in Toton Limited, a company registered in England and Wales (Company No. 17167064).</p>
         <p><a href="privacy.html">Privacy Policy</a> | <a href="mailto:support@shelfsyncapp.co.uk">Support</a></p>
     </footer>
 </body>
