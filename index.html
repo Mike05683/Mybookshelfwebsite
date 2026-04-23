@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBookShelf | AI-Powered Personal Library Manager</title>
+    <title>Shelf Scan | AI-Powered Library Manager</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
@@ -11,9 +12,11 @@
         :root {
             --background: #0A0A0A;
             --surface: #141414;
-            --accent: #C8860A;
+            --accent: #B84D00;
+            --accent-light: #D6701F;
             --text-primary: #FFFFFF;
             --text-secondary: #9E9E9E;
+            --cream: #FDF9F1;
         }
         body {
             background-color: var(--background);
@@ -24,109 +27,194 @@
             flex-direction: column;
             align-items: center;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         header {
-            padding: 80px 20px;
+            padding: 100px 20px 60px;
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 20px rgba(184, 77, 0, 0.3));
+        }
+        .logo-container img {
+            width: 100%;
+            height: 100%;
         }
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -1.5px;
+            margin: 0 0 10px;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #FFF 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .tagline {
             font-size: 1.5rem;
-            color: var(--accent);
+            color: var(--accent-light);
             font-weight: 700;
             margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .description {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 40px;
         }
         main {
             width: 100%;
-            max-width: 1000px;
-            padding: 20px;
+            max-width: 1100px;
+            padding: 0 20px 80px;
         }
         section {
             background: var(--surface);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid #2A2A2A;
+            padding: 60px 40px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             margin-bottom: 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(184, 77, 0, 0.05), transparent);
+            pointer-events: none;
+        }
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
         }
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
         }
         .feature-card {
-            padding: 20px;
+            padding: 30px;
             text-align: left;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(184, 77, 0, 0.2);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
         }
         .feature-card h3 {
-            color: var(--accent);
-            margin-bottom: 10px;
+            color: var(--accent-light);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
             font-weight: 700;
         }
-        footer {
-            padding: 40px;
+        .feature-card p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        footer {
+            padding: 60px 20px;
+            color: var(--text-secondary);
+            font-size: 1rem;
             text-align: center;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         a {
-            color: var(--accent);
+            color: var(--accent-light);
             text-decoration: none;
             font-weight: 600;
+            transition: opacity 0.2s;
         }
         a:hover {
+            opacity: 0.8;
             text-decoration: underline;
         }
         .cta-button {
-            background-color: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: #000;
-            padding: 16px 32px;
-            border-radius: 999px;
-            font-size: 1.1rem;
+            padding: 20px 48px;
+            border-radius: 100px;
+            font-size: 1.25rem;
             font-weight: 800;
             display: inline-block;
             margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(184, 77, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(184, 77, 0, 0.4);
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2.8rem; }
+            .tagline { font-size: 1.1rem; }
+            header { padding-top: 60px; }
+            .logo-container { width: 100px; height: 100px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>📚 MyBookShelf</h1>
-        <p class="tagline">The premium AI library in your pocket.</p>
-        <p style="color: var(--text-secondary); font-size: 1.2rem;">Scan your spines, value your collection, and discover your next favorite read with cutting-edge AI.</p>
+        <div class="logo-container">
+            <img src="logo.svg" alt="Shelf Scan Logo">
+        </div>
+        <h1>Shelf Scan</h1>
+        <p class="tagline">Scan to Library</p>
+        <p class="description">Turn your physical bookshelf into a digital collection in seconds. Identify, value, and organize with the power of AI.</p>
         <div class="cta-button">Coming Soon to App Stores</div>
     </header>
 
     <main>
         <section>
-            <h2>Elevate Your Reading Experience</h2>
+            <h2>Your Library, Reimagined.</h2>
             <div class="features">
                 <div class="feature-card">
-                    <h3>🔍 AI Spine Scanning</h3>
-                    <p>Point your camera at your shelf. Our advanced computer vision identifies your entire collection in seconds.</p>
+                    <span class="feature-icon">📸</span>
+                    <h3>Instant Spine Recognition</h3>
+                    <p>Simply point your camera at your shelves. Our AI identifies every book spine simultaneously, building your catalog instantly.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>💎 eBay Valuations</h3>
-                    <p>Instantly see the market value of your books with real-time ISBN-based eBay lookups.</p>
+                    <span class="feature-icon">💰</span>
+                    <h3>Real-Time Valuations</h3>
+                    <p>Curious what your collection is worth? Get live market data and eBay valuations for every book you own.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>✨ Discovery Engine</h3>
-                    <p>Receive hyper-personalized recommendations based strictly on the unique themes of your specific shelves.</p>
+                    <span class="feature-icon">🧠</span>
+                    <h3>Smart Discovery</h3>
+                    <p>Deep-learning algorithms analyze your reading taste to recommend your next obsession from within your existing collection or beyond.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 MyBookShelf. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a> | <a href="mailto:support@mybookshelfapp.co.uk">Support</a></p>
+        <p>&copy; 2026 Shelf Scan. All rights reserved.</p>
+        <p><a href="privacy.html">Privacy Policy</a> | <a href="mailto:support@shelfscanapp.co.uk">Support</a></p>
     </footer>
 </body>
 </html>
