@@ -3,178 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelf Sync | AI-Powered Library Manager</title>
+    <title>Shelf Sync | Scan to Library</title>
     <link rel="icon" type="image/png" href="unnamed.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --background: #0A0A0A;
-            --surface: #141414;
-            --accent: #B84D00;
-            --accent-light: #D6701F;
-            --text-primary: #FFFFFF;
-            --text-secondary: #9E9E9E;
-            --cream: #FDF9F1;
+            --bg-logo: #FDF9F1;
+            --bg-accent: #F7EFE0;
+            --brand-primary: #B84D00; /* Deep Orange */
+            --brand-secondary: #D6701F; /* Mid Orange */
+            --brand-light: #E67E22;
+            --text-main: #3E2723; /* Deep Coffee */
+            --text-muted: #6D4C41;
+            --white: #FFFFFF;
+            --shadow: 0 12px 40px rgba(93, 64, 55, 0.12);
         }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
         body {
-            background-color: var(--background);
-            color: var(--text-primary);
+            background-color: var(--bg-logo);
+            color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             line-height: 1.6;
-            overflow-x: hidden;
         }
+
         header {
-            padding: 100px 20px 60px;
+            padding: 80px 20px 40px;
             text-align: center;
             max-width: 900px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .logo-container {
-            width: 320px;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 20px rgba(184, 77, 0, 0.2));
+            width: 100%;
+            max-width: 450px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
         }
+        
         .logo-container img {
             width: 100%;
             height: auto;
+            filter: drop-shadow(0 8px 16px rgba(93, 64, 55, 0.1));
         }
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin: 0 0 10px;
-            letter-spacing: -2px;
-            background: linear-gradient(135deg, #FFF 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: none; /* Logo already contains the name */
-        }
+
         .tagline {
-            font-size: 1.5rem;
-            color: var(--accent-light);
-            font-weight: 700;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: var(--brand-primary);
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
         }
-        .description {
-            color: var(--text-secondary);
-            font-size: 1.25rem;
-            max-width: 600px;
+
+        .hero-text {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 650px;
             margin-bottom: 40px;
+            font-weight: 500;
         }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+            color: var(--white);
+            padding: 20px 48px;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(184, 77, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(184, 77, 0, 0.35);
+        }
+
         main {
             width: 100%;
             max-width: 1100px;
-            padding: 0 20px 80px;
+            padding: 40px 20px 100px;
         }
-        section {
-            background: var(--surface);
-            padding: 60px 40px;
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 40px;
-            text-align: center;
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 28px;
+            border: 1px solid rgba(184, 77, 0, 0.08);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        section::before {
+
+        .feature-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 4px;
             height: 100%;
-            background: radial-gradient(circle at top right, rgba(184, 77, 0, 0.05), transparent);
-            pointer-events: none;
+            background: linear-gradient(to bottom, var(--brand-primary), var(--brand-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 40px;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .feature-card {
-            padding: 30px;
-            text-align: left;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
+
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(184, 77, 0, 0.2);
+            transform: translateY(-8px);
         }
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            display: block;
+
+        .feature-card:hover::after {
+            opacity: 1;
         }
+
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-accent);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+
         .feature-card h3 {
-            color: var(--accent-light);
-            margin-bottom: 15px;
+            color: var(--brand-primary);
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
+            margin: 0 0 12px;
         }
+
         .feature-card p {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 1.1rem;
             margin: 0;
+            line-height: 1.7;
         }
+
         footer {
-            padding: 60px 20px;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            text-align: center;
             width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 80px 20px;
+            background: var(--bg-accent);
+            text-align: center;
+            border-top: 1px solid rgba(184, 77, 0, 0.05);
         }
-        a {
-            color: var(--accent-light);
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            width: 180px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .company-info {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        footer a {
+            color: var(--brand-primary);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            margin: 0 12px;
             transition: opacity 0.2s;
         }
-        a:hover {
-            opacity: 0.8;
+
+        footer a:hover {
             text-decoration: underline;
         }
-        .cta-button {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            color: #000;
-            padding: 20px 48px;
-            border-radius: 100px;
-            font-size: 1.25rem;
-            font-weight: 800;
-            display: inline-block;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(184, 77, 0, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
-        }
-        .cta-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 40px rgba(184, 77, 0, 0.4);
-            text-decoration: none;
-        }
+
         @media (max-width: 600px) {
-            h1 { font-size: 2.8rem; }
-            .tagline { font-size: 1.1rem; }
-            header { padding-top: 60px; }
-            .logo-container { width: 240px; }
+            header { padding-top: 40px; }
+            .logo-container { max-width: 320px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .tagline { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -183,39 +214,43 @@
         <div class="logo-container">
             <img src="unnamed.png" alt="Shelf Sync Logo">
         </div>
-        <h1>Shelf Sync</h1>
-        <p class="tagline">Scan to Library</p>
-        <p class="description">Turn your physical bookshelf into a digital collection in seconds. Identify, value, and organize with the power of AI.</p>
-        <div class="cta-button">Coming Soon to App Stores</div>
+        <p class="tagline">The Future of Reading</p>
+        <p class="hero-text">Transform your physical library into a beautiful, AI-powered digital experience. Scan shelves, value collections, and find your next favorite book.</p>
+        <a href="#" class="cta-button">Coming Soon to iOS & Android</a>
     </header>
 
     <main>
-        <section>
-            <h2>Your Library, Reimagined.</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <span class="feature-icon">📸</span>
-                    <h3>Instant Spine Recognition</h3>
-                    <p>Simply point your camera at your shelves. Our AI identifies every book spine simultaneously, building your catalog instantly.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💰</span>
-                    <h3>Real-Time Valuations</h3>
-                    <p>Curious what your collection is worth? Get live market data and eBay valuations for every book you own.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🧠</span>
-                    <h3>Smart Discovery</h3>
-                    <p>Deep-learning algorithms analyze your reading taste to recommend your next obsession from within your existing collection or beyond.</p>
-                </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-circle">📸</div>
+                <h3>Visual Intelligence</h3>
+                <p>Point your camera at your bookshelf. Our custom AI identifies every spine in one photo, creating your digital catalog in seconds.</p>
             </div>
-        </section>
+            <div class="feature-card">
+                <div class="icon-circle">💎</div>
+                <h3>Live Valuation</h3>
+                <p>Stay updated on the real-world value of your collection with real-time eBay and market pricing for every volume you own.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-circle">✨</div>
+                <h3>Smart Discovery</h3>
+                <p>Receive hyper-personalized recommendations based on the actual themes and styles of your existing library.</p>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Shelf Sync. All rights reserved.</p>
-        <p>Shelf Sync is a product of Made in Toton Limited, a company registered in England and Wales (Company No. 17167064).</p>
-        <p><a href="privacy.html">Privacy Policy</a> | <a href="mailto:support@shelfsyncapp.co.uk">Support</a></p>
+        <div class="footer-content">
+            <img src="unnamed.png" alt="Shelf Sync" class="footer-logo">
+            <p class="company-info">
+                &copy; 2026 Shelf Sync. All rights reserved.<br>
+                Shelf Sync is a product of Made in Toton Limited, a company registered in England and Wales (Company No. 17167064).
+            </p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="mailto:support@shelfsyncapp.co.uk">Support</a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
